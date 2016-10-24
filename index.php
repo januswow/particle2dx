@@ -2,24 +2,24 @@
 session_start();
 
 if ( !function_exists("gzdecode") ) {
-    function gzdecode($data) {  return gzinflate(substr($data,10,-8)); } 
+    function gzdecode($data) {
+    	return gzinflate(substr($data,10,-8));
+    } 
 }
 $ua=$_SERVER['HTTP_USER_AGENT'];
 $boxsize=200;
 
-
-function sGray($str) { return "<span style='color:gray;'>".$str."</span>";}
+function sGray($str) {
+	return "<span style='color:gray;'>".$str."</span>";
+}
 date_default_timezone_set("Asia/Tokyo");
 
 $facebook_app_id="";
 
 include('include.php');
 
-
 if (isset($_REQUEST['type'])) {
-
     switch ( $_REQUEST['type'] ) {
-
 		//jsでのgzipのやり方がわからずわざわざphpで出力
 		case "b64gzpng_dl":
 			echo base64_encode( gzencode( file_get_contents("png_ul/".$_REQUEST['filename']) ));
@@ -99,100 +99,120 @@ if (isset($_REQUEST['type'])) {
 			break;
     }
 }
-
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:mixi="http://mixi-platform.com/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
-<head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac">
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Particle2dx" />
+		<meta property="og:url" content="http://particle2dx.com/stg/" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:image" content="http://particle2dx.com/thumbnail.png" />
+		<meta property="og:site_name" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac " />
+		<meta property="og:description" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac " />
+		<!-- デバイス幅でズームなし -->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="jscolor.js"></script>
+		<script>
+			boxsize=<?=$boxsize?>;
+		</script>
+		<title>Particle2dx</title>
+		<style>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac">
+			body{
+				color: #bbbbbb;
+				font-size:80%;
+				background-color:#222222;	
+			}
+			<? if (preg_match("/chrome/i",$ua)) {?>
+			input{
+				background-color:#dddddd;
+				opacity:0.7;	
+			}
+			<? } ?>
+			h3{
+				color:white;
+				border-bottom:1px solid #444444;
+			}
+			h4{
+				color:#cccccc;
+				border-bottom:1px solid #444444;
+				padding: 0px;
+				margin-top : 4px;
+				margin-bottom : 4px;
+				margin-left : 0px;
+			}
+			.shortc{
+				color:#88bbbb;	
+			}
+			
+			a:link {color: #88ccff;text-decoration: none; }
+			a:visited {color: #88ccff;text-decoration: none;}
+			a:hover {color: #88ccff;text-decoration: underline;}
+			
+			.headchar {color: #5588cc;text-decoration: none; font-size:110%; font-weight:bold;}
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Particle2dx" />
-<meta property="og:url" content="http://particle2dx.com/stg/" />
-<meta property="og:locale" content="ja_JP" />
-<meta property="og:image" content="http://particle2dx.com/thumbnail.png" />
-<meta property="og:site_name" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac " />
-<meta property="og:description" content="OnlineParticleEditor for cocos2dx CoronaSDK Win&Mac " />
+			.slider-short
+			{
+				width: 100px;
+			}
+			.slider-long
+			{
+				width: 150px;
+			}
+			.textfield-long
+			{
+				width: 140px;
+			}
+			.color_palette_width
+			{
+				width: 270px;
+				padding-left: 6px;
+				padding-top: 3px;
+				padding-bottom: 3px;
+			}
 
-<!-- デバイス幅でズームなし -->
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-	boxsize=<?=$boxsize?>;
-</script>
-<title>Particle2dx</title>
-<style>
-
-	body{
-		color: #bbbbbb;
-		font-size:80%;
-		background-color:#222222;	
-	}
-	<? if (preg_match("/chrome/i",$ua)) {?>
-	input{
-		background-color:#dddddd;
-		opacity:0.7;	
-	}
-	<? } ?>
-	h3{
-		color:white;
-		border-bottom:1px solid #444444;
-	}
-	h4{
-		color:#cccccc;
-		border-bottom:1px solid #444444;
-		padding: 0px;
-		margin-top : 4px;
-		margin-bottom : 4px;
-		margin-left : 0px;
-	}
-	.shortc{
-		color:#88bbbb;	
-	}
-	
-	a:link {color: #88ccff;text-decoration: none; }
-	a:visited {color: #88ccff;text-decoration: none;}
-	a:hover {color: #88ccff;text-decoration: underline;}
-	
-	.headchar {color: #5588cc;text-decoration: none; font-size:110%; font-weight:bold;}
-
-</style>
-</head>
+			.gradientBackground
+			{
+				background-image: linear-gradient( to right, #000000, #202020 );
+				padding: 6px;
+				font-weight: bold;
+			}
+		</style>
+	</head>
 <body>
 
 <!-- facebook -->
 <div id="fb-root"></div>
 <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=<?=$facebook_app_id?>";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=<?=$facebook_app_id?>";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 </script>
 
 <?
 if (preg_match("/(iphone|ipod|android)/i",$ua)){
-
-   	exit ("<p style='text-align:center; font-size:170%;' >
-   			Sorry,Particle2dx doesn't work on MobilePhone.<br/>
-   			use WinPC/Mac. <br/>
-   			
-   			<a href='https://www.youtube.com/channel/UCAa8s6pDjeER0SqMgvme4ew' style='font-size:140%;font-weight:bold;' >Youtube Tutorial</a><br/>
-   			<a href='https://www.facebook.com/particle2dx' target='_blank' style='font-size:140%;font-weight:bold;' >FacebookPage</a><br/>
-   			</p>
-   			<img src='thumbnail.png' style='border:2px solid black;'  width='100%' height='100%'  /><br/><br/>
-   			<img src='thumbnail2.png' style='border:2px solid black;' width='100%' height='100%' /><br/>
-   		</p>
-   		");
+	exit ("<p style='text-align:center; font-size:170%;' >
+			Sorry,Particle2dx doesn't work on MobilePhone.<br/>
+			use WinPC/Mac. <br/>
+			
+			<a href='https://www.youtube.com/channel/UCAa8s6pDjeER0SqMgvme4ew' style='font-size:140%;font-weight:bold;' >Youtube Tutorial</a><br/>
+			<a href='https://www.facebook.com/particle2dx' target='_blank' style='font-size:140%;font-weight:bold;' >FacebookPage</a><br/>
+			</p>
+			<img src='thumbnail.png' style='border:2px solid black;'  width='100%' height='100%'  /><br/><br/>
+			<img src='thumbnail2.png' style='border:2px solid black;' width='100%' height='100%' /><br/>
+		</p>
+		");
 }
-if (!preg_match("/(Chrome|safari|firefox)/i",$ua)){
-   	exit ("sorry ,now Particle2dx doesn't work on IE & mobilePhone. <br/>use WinPC/Mac & Chrome/Safari/Firefox");
+if (!preg_match("/(Chrome|safari|firefox)/i",$ua)) {
+	exit ("sorry ,now Particle2dx doesn't work on IE & mobilePhone. <br/>use WinPC/Mac & Chrome/Safari/Firefox");
 }
 
 $_SESSION['builtin']="Fire"; 
@@ -202,35 +222,34 @@ $plist_temp = file_get_contents("particle/template.plist");
 $plist_template = htmlentities($plist_temp,ENT_QUOTES,"utf-8");
 
 $plist_64=base64_encode($plist_temp);
-
 //$plist_template = nl2br(htmlentities($plist_template,ENT_QUOTES,"utf-8"));
 ?>
-<div style="background-color:#393939;padding:3px;padding-left:10px;">
-	 <span style="font-size:170%;font-weight:bold;color:white;" >Particle2dx</span>
-	 design particle for Cocos2dx CoronaSDK
-	 <script>
-	    function topPaneToggle(p_name){
-	    	if (p_name=="tutorial"){
-		    	$('#top_pane_shortcut').hide();
-	    	}else{
-		    	$('#top_pane_tutorial').hide();
-	    	}
-		    $('#top_pane_'+p_name).slideToggle(100);
-	    }
-	 </script>
- 
-	 <a href="javascript:$('#top_pane_shortcut').slideToggle(30); ">about</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
 
-	 <!-- facebook -->
-	 <div class="fb-like" data-href="http://particle2dx.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-	 <!-- twitter -->
+<div style="background-color:#393939;padding:3px;padding-left:10px;">
+	<span style="font-size:170%;font-weight:bold;color:white;" >Particle2dx</span>
+	design particle for Cocos2dx CoronaSDK
+	<script>
+	function topPaneToggle(p_name){
+		if (p_name=="tutorial"){
+			$('#top_pane_shortcut').hide();
+		}else{
+			$('#top_pane_tutorial').hide();
+		}
+		$('#top_pane_'+p_name).slideToggle(100);
+	}
+	</script>
+
+	<a href="javascript:$('#top_pane_shortcut').slideToggle(30); ">about</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+
+	<!-- facebook -->
+	<div class="fb-like" data-href="http://particle2dx.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+	<!-- twitter -->
 <a href="https://twitter.com/intent/tweet?button_hashtag=particle2dx&text=My%20impression%20is...%20%20My%20feedback%20is....%20%20I%20found%20Bug....%20" class="twitter-hashtag-button" data-url="http://particle2dx.com">Tweet #particle2dx</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> 
 
 </div>
 
 <div id="top_pane_shortcut" style="display:none; padding-left:10px; padding-right:10px; padding-bottom:10px; background-color:#393939" >
-
 	<div style='padding:15px;font-size:15px; background-color:#222222; 
 	    -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */  
 		-moz-border-radius: 10px;   /* Firefox用 */  ' >	
@@ -374,7 +393,7 @@ $plist_64=base64_encode($plist_temp);
 			</tr></table>	
 		
 			alpha<input type="range" id="bg_alpha" min=0 max=1 step="0.01" value=1 
-			onMouseMove="if (!flg_mousedown) return;  setBGColor(bg_col,this.value);"/>
+			onInput="if (!flg_mousedown) return;  setBGColor(bg_col,this.value);"/>
 
 
 	    <script>
@@ -604,7 +623,7 @@ $plist_64=base64_encode($plist_temp);
 					<a href="javaScript:toggleGrid();">Grid</a> 
 					
 					<input type="range" id="grid" name="grid" min="20" max="160" step="10" value="100" 
-					onMouseMove="
+					onInput="
 						if (!flg_mousedown) return;
 						setGrid(this.value);
 						$('#grid_disp').html(this.value+'px');
@@ -700,10 +719,11 @@ $plist_64=base64_encode($plist_temp);
 		
 		<table>
 			<tr><td >					
-				<a id="dl" href="javascript:
+				<a id="dl" href="javascript:downloadPlist(p2dx.slot_current);" >
+				<!-- <a id="dl" href="javascript:
 						document.form_post_dl.type.value='cocos_plist_dl';
 						document.form_post_dl.plist_xml.value=encodeURIComponent(xml);
-						document.form_post_dl.submit();" > 
+						document.form_post_dl.submit();" > -->
 					<img src='logo_cocos_arrow.png' />
 				</a>
 			</td><td colspan=2 >	
@@ -757,471 +777,955 @@ $plist_64=base64_encode($plist_temp);
 	</table>
 </div>
 
-<div id="topleft_pane_shape" style="display:none;" >
-
+<div id="topleft_pane_shape" style="display:none;position:relative;">
 	<!-- texture -->
 	<script>
-		// textureをセット
+		// textureをセット // Set the texture
 		var old_name;
 		function setTex(name){ //name texture filename
 			prev_string.setVisible(false);
 			//alert(name + " : " + png_gz_b64[name]);
-			texture1 = cc.TextureCache.getInstance().addImage('png/'+name+'.png');//元画像を用意
+			texture1 = cc.TextureCache.getInstance().addImage('png/'+name+'.png');//元画像を用意 // Prepared the original image
 			emitter[p2dx.slot_current].setTexture(texture1);
-			png_gz_b64[p2dx.slot_current]=png_gz_b64[name]; //slotのpngをセット
-			dumpToInputTag(p2dx.slot_current);//inputタグに書き出す
+			png_gz_b64[p2dx.slot_current]=png_gz_b64[name]; //slotのpngをセット // Set the png of slot
+			dumpToInputTag(p2dx.slot_current);//inputタグに書き出す // Write to the input tag
 		}
-		
 		function prevTex(name){
 			prev_string.setVisible(false);
-			var temp_tex = cc.TextureCache.getInstance().addImage('png/'+name+'.png');//元画像を用意
+			var temp_tex = cc.TextureCache.getInstance().addImage('png/'+name+'.png');//元画像を用意 // Prepared the original image
 			clog("prevTex " + 'png/'+name+'.png')
 			emitter[p2dx.slot_current].setTexture(temp_tex);
 			prev_string.setVisible(true);
 		}
-		
 		function prevMouseOut(name){
 			clog('prevMouseOut texture1=' + texture1);
 			emitter[p2dx.slot_current].setTexture(texture1);
 			prev_string.setVisible(false);
 
-			dumpToInputTag(p2dx.slot_current);//inputタグに書き出す
+			dumpToInputTag(p2dx.slot_current);//inputタグに書き出す // Write to the input tag
 		}
-		
 	</script>
-	
-	<table><tr><td id='textures'>
+<!-- ########## BLEND SECTION ########## -->
+	<div stlye="position:relative;">
+		<span style="font-weight:bold">Blend</span><!--  : src 
+		<select id="blend_func_options_src" style="visibility:hidden" 
+			onChange="javascript:
+				emitter[p2dx.slot_current].setBlendFunc(this.options[this.options.selectedIndex].value, document.getElementById('blend_func_options_dst').options[document.getElementById('blend_func_options_dst').options.selectedIndex].value);
+				dumpToInputTag(p2dx.slot_current);">
+			<option value="0">ZERO</option>
+			<option value="1">ONE</option>
+			<option value="770" selected="selected">SRC_ALPHA</option>
+			<option value="771">ONE_MINUS_SRC_ALPHA</option>
+			<option value="772">DST_ALPHA</option>
+			<option value="773">ONE_MINUS_DST_ALPHA</option>
+			<option value="774">DST_COLOR</option>
+			<option value="775">ONE_MINUS_DST_COLOR</option>
+			<option value="776">SRC_ALPHA_SATURATE</option>
+		</select>
+		 dst
+		<select id="blend_func_options_dst" style="visibility:hidden"
+			onChange="javascript:
+				emitter[p2dx.slot_current].setBlendFunc(document.getElementById('blend_func_options_src').options[document.getElementById('blend_func_options_src').options.selectedIndex].value, this.options[this.options.selectedIndex].value);
+				dumpToInputTag(p2dx.slot_current);">
+			<option value="0">ZERO</option>
+			<option value="1" selected="selected">ONE</option>
+			<option value="768">SRC_COLOR</option>
+			<option value="769">ONE_MINUS_SRC_COLOR</option>
+			<option value="770">SRC_ALPHA</option>
+			<option value="771">ONE_MINUS_SRC_ALPHA</option>
+			<option value="772">DST_ALPHA</option>
+			<option value="773">ONE_MINUS_DST_ALPHA</option>
+		</select> -->
+		<a id="blend_add"    href="javascript:emitter[p2dx.slot_current].setBlendAdditive(true);  dumpToInputTag(p2dx.slot_current);">Additive</a> 
+		<a id="blend_normal" href="javascript:emitter[p2dx.slot_current].setBlendAdditive(false); dumpToInputTag(p2dx.slot_current);">Normal</a>
+		<span id="blend_func_display" style="position:absolute;right:6px;"></span>
+	</div>
+	<table>
+		<tr>
+			<td>
+				<h3><span style="color:gray;">Start</span></h3>
+				<script>
+					updStartCol = function() {
+						emitter[p2dx.slot_current].setStartColor(
+							new cc.Color4F(//r,g,b,a
+								parseFloat($("#start_r").val()/255),
+								parseFloat($("#start_g").val()/255),
+								parseFloat($("#start_b").val()/255),
+								parseFloat($("#start_a").val()/100)
+							)
+						);
+						updateColorPicker('start');
+						current_start_color=emitter[p2dx.slot_current].getStartColor();
+					};
+					updStartColVar = function() {
+						emitter[p2dx.slot_current].setStartColorVar(
+							new cc.Color4F(//r,g,b,a
+								parseFloat($("#start_r_var").val()/100),
+								parseFloat($("#start_g_var").val()/100),
+								parseFloat($("#start_b_var").val()/100),
+								parseFloat($("#start_a_var").val()/100)
+							)
+						);
+					};
+					updEndCol = function() {
+						emitter[p2dx.slot_current].setEndColor(
+							new cc.Color4F(//r,g,b,a
+								parseFloat($("#end_r").val()/255),
+								parseFloat($("#end_g").val()/255),
+								parseFloat($("#end_b").val()/255),
+								parseFloat($("#end_a").val()/100)
+							)
+						);
+						updateColorPicker('end');
+						current_end_color=emitter[p2dx.slot_current].getEndColor();
+					};
+					updEndColVar = function() {
+						emitter[p2dx.slot_current].setEndColorVar(
+							new cc.Color4F(//r,g,b,a
+								parseFloat($("#end_r_var").val()/100),
+								parseFloat($("#end_g_var").val()/100),
+								parseFloat($("#end_b_var").val()/100),
+								parseFloat($("#end_a_var").val()/100)
+							)
+						);
+					};
+				</script>
+
+<!-- ########## START SIZE/SPIN SECTION ########## -->
+<table width="470">
+	<tr>
+		<td>
+			Size 
+		</td>
+		<td width="100" >
+			<span id="start_size_disp">**</span>
+		</td>
+		<td>
+			<input type="range" id="startSize" name="startSize" mix="0" max="400" class="slider-short"
+				onInput="
+					if (!flg_mousedown) return;
+					emitter[p2dx.slot_current].setStartSize(parseFloat(this.value));
+					$('#startSize_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="startSize_text" name="startSize_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setStartSize(parseFloat(this.value)); 
+					$('#startSize').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="range" id="startSizeVar" name="startSize" mix="0" max="400" class="slider-short"
+				onInput="
+					if (!flg_mousedown) return;
+					emitter[p2dx.slot_current].setStartSizeVar(parseFloat(this.value));
+					$('#startSizeVar_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="startSizeVar_text" name="startSizeVar_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setStartSizeVar(parseFloat(this.value)); 
+					$('#startSizeVar').val(this.value);
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Spin 
+		</td>
+		<td>
+			<span id="start_spin_disp" >**</span>  
+		</td>
+		<td>
+			<input type="range" id="startSpin" name="startSpin" min="-1440" max="1440" class="slider-short" value="" 
+				onInput="
+					if (!flg_mousedown) return;
+					emitter[p2dx.slot_current].setStartSpin(parseFloat(this.value));
+					$('#startSpin_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="startSpin_text" name="startSpin_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setStartSpin(parseFloat(this.value)); 
+					$('#startSpin').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="range" id="startSpinVar" name="startSpinVar" min="0" max="1440" class="slider-short" value="" 
+				onInput="
+					if (!flg_mousedown) return;
+					emitter[p2dx.slot_current].setStartSpinVar(parseFloat(this.value));
+					$('#startSpinVar_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="startSpinVar_text" name="startSpinVar_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; } 						
+					emitter[p2dx.slot_current].setStartSpinVar(parseFloat(this.value)); 
+					$('#startSpinVar').val(this.value);
+					dumpToInputTag();
+			" />
+			</br>&nbsp;
+		</td>
+	</tr>
+		
+<!-- ########## START COLOR INPUT SECTION ########## -->
+	<tr>
+		<td valign="top" colspan="3" class="gradientBackground" style="position:relative">
+			COLOR
+			<span style="position:absolute;right:6px">
+				Paste End 
+				<input type="button" id="paste_end_color" value="Color" style="font-size:12px"
+					onClick="
+						emitter[p2dx.slot_current].setStartColor(current_end_color);
+						dumpToInputTag();
+						updStartCol();
+				"/>
+				<input type="button" id="paste_end_color_var" value="Var" 
+					onClick="
+						emitter[p2dx.slot_current].setStartColorVar(emitter[p2dx.slot_current].getEndColorVar());
+						dumpToInputTag();
+						updStartColVar();
+				"/>
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" style="padding:10px">
+			<!-- Color Picker : jscolor, 'onFineChange' does not trigger when value changed by '.jscolor.fromRGB()' -->
+			<input
+				id="start_color_picker" size="22"
+				class="jscolor {
+					width:300,
+					height:150,
+					position:'right',
+					borderColor:'#FFF',
+					insetColor:'#FFF',
+					backgroundColor:'#666',
+					onFineChange:'updateStartColor(this)'
+				}"
+				style="opacity:1"
+			>
+			<script>
+				function updateStartColor(picker) {
+					// change value of rgb range input, will trigger update color process
+					$("#start_r").val(picker.rgb[0]);
+					$("#start_g").val(picker.rgb[1]);
+					$("#start_b").val(picker.rgb[2]);
+					$('#start_r_text').val(parseInt(picker.rgb[0]));
+					$('#start_g_text').val(parseInt(picker.rgb[1]));
+					$('#start_b_text').val(parseInt(picker.rgb[2]));
+					updStartCol();
+					dumpToInputTag();
+				}
+			</script>
+		</td>
+	</tr>
+	<tr bgcolor="#292929">
+		<td valign="top" align="center">
+			R
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="start_r_text" name="start_r_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_r').val(this.value);
+					updStartCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="start_r_var_text" name="start_r_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_r_var').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="start_r" name="start_r" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#start_r_text').val(this.value);
+					updStartCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="start_r_var" name="start_r_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#start_r_var_text').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" align="center">
+			G
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="start_g_text" name="start_g_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_g').val(this.value);
+					updStartCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="start_g_var_text" name="start_g_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_g_var').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="start_g" name="start_g" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#start_g_text').val(this.value);
+					updStartCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="start_g_var" name="start_g_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#start_g_var_text').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr bgcolor="#292929">
+		<td valign="top" align="center">
+			B
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="start_b_text" name="start_b_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_b').val(this.value);
+					updStartCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="start_b_var_text" name="start_b_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_b_var').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="start_b" name="start_b" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#start_b_text').val(this.value);
+					updStartCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="start_b_var" name="start_b_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#start_b_var_text').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" align="center">
+			A
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="start_a_text" name="start_a_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_a').val(this.value);
+					updStartCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="start_a_var_text" name="start_a_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#start_a_var').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="start_a" name="start_a" mix="0" max="100" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#start_a_text').val(this.value);
+					updStartCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="start_a_var" name="start_a_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#start_a_var_text').val(this.value);
+					updStartColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+</table>
+
+<!-- ########## START COLOR PALETTE SECTION ########## -->
+<!-- <div id="start_color" style="visibility: hidden">startcol</div> -->
+<div style="margin-left:60px;margin-right:60px">
+<table id="palette" cellspacing=1 border=0 style="width:100%">
+	<tr>
 		<?
-		$pngs= explode("\n",trim(`ls png/ | grep -i 'png'`));
-		foreach ($pngs as $val){
-			$val=preg_replace("/(.*)(\..*)/",'$1',trim($val)); 
-			?><a href='javascript:void(0)' onClick='setTex("<?=$val?>"); 
-													$("#textures").children("a").children("img").css("background-color",""); 
-													$(this).children("img").css("background-color","#aaaaff"); '
-										   onMouseOver='prevTex("<?=$val?>");' 
-										   onMouseOut='prevMouseOut();' 
-			<? if ($_SESSION['png_name']==$val) echo " style='font-weight:bold' "; ?>
-			><img src="png/<?=$val?>.png" alt="<?=$val ?>" /></a><?			
-			$png_path= 'png/'.$val.'.png';
-			$png_binary=file_get_contents($png_path);
-			$gzip=gzencode($png_binary);
-			$png_gz_base64[$val]=base64_encode($gzip);
-		}
-		$json_gz_b64_png= json_encode($png_gz_base64);
-		?>
-		<a href="javascript:setTex('png_ul/'+response);" style="font-weight:bold">
-		    <img id="uploaded_png" src="" />
-		</a>
-		
-	</td><td>
-		<div id="dropzone" dropzone style="border:1px solid #666666; width:100px; height:80px;">
-			DropPNG
-		</div>
-	    <script>
-	      $('#dropzone').on('drop', function(event) {
-		      //ファイル取得
-		      var file = event.originalEvent.dataTransfer.files[0];
-	          var formData = new FormData();
-	          formData.append('file', file);
-
-	          //アップロード
-			  $.ajax('index.php?type=texture_png_upload', {
-			   method: 'POST',
-			   contentType: false,
-			   processData: false,
-			   data:formData,
-			   error: function(xhr, error) {
-			    clog('ul fail');
-			    clog(error);
-			   },
-			   success: function(response) {
-			    clog('ul success');
-			    clog(response);
-			    
-			    $("#uploaded_png").attr('src','png_ul/'+response);
-			    var myTexture = cc.TextureCache.getInstance().addImage('png_ul/'+response);//元画像を用意
-				emitter[p2dx.slot_current].setTexture(myTexture);
-				
-				url="index.php?type=b64gzpng_dl&filename="+response;
-				$.ajax({
-				   async:false,
-				   type: "GET",
-				   url: url,
-				   success:function(data){
-					   png_gz_b64[p2dx.slot_current]=data;// gzip > base64 したファイルを取得
-				   }
-				});	
-				dumpToInputTag(p2dx.slot_current);//inputタグに書き出す
-			   }
-			  });
-		      return false;
-	      }).on('dragover', function(event) {
-			  return false;
-	  	  });
-	    </script>
-    
-	</td></tr></table>   
-
-<table><tr><td style="vertical-align:top;">
-	</td><td style="vertical-align:top;">	
-
-	</td><td style="vertical-align:top;">
-									
-</td></tr></table>
-			  Blend 
-			  <a id="blend_add"    href="javascript:emitter[p2dx.slot_current].setBlendAdditive(true);  dumpToInputTag(p2dx.slot_current);">Additive</a> 
-			  <a id="blend_normal" href="javascript:emitter[p2dx.slot_current].setBlendAdditive(false); dumpToInputTag(p2dx.slot_current);">Normal</a> 
-<table><tr><td>
-	<h3><span style="color:gray;">Start</span></h3>
-	
-		<div id="start_color" >startcol</div>	
-		
-		<table id="palette" cellspacing=1 border=0 ><tr>
-			    <? 
-			    for($i=3;$i<=15;$i=$i+3) { 
-			    	echo "<tr>";
-					for($j=3;$j<=15;$j=$j+3) { 
-						for($k=3;$k<=15;$k=$k+3) { 							    
+		for($i=3;$i<=15;$i=$i+3) {
+			echo "<tr>";
+			for($j=3;$j<=15;$j=$j+3) {
+				for($k=3;$k<=15;$k=$k+3) {
 					?>
-					<td col="col" title="#<?=dechex($i*256+$j*16+$k);?>"  style="background-color:#<?=dechex($i*256+$j*16+$k);?>;width:8px;height:8px;font-size:6px;">&nbsp;
+					<td col="col" title="#<?=dechex($i*256+$j*16+$k);?>"  style="background-color:#<?=dechex($i*256+$j*16+$k);?>;width:8px;height:8px;">
 					</td>
-					<?  }
-				    } 
-				    echo "</tr>";
-		        } ?>
-		</tr></table>
+					<?
+				}
+			}
+			echo "</tr>";
+		} ?>
+	</tr>
+</table>
+</div>
+<script>
+	var palette_col;
+	$("td[col=col]").bind("mouseover", function(){
+		palette_col=$(this).css("background-color");
+		$("#start_color").css("background-color",palette_col);
+		palette_col = palette_col.replace("rgb(","");
+		palette_col = palette_col.replace(")","");
+		p_ary = palette_col.split(",");
+		col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
+		col_4f=cc.c4FFromccc3B(col_3b);
+		emitter[p2dx.slot_current].setStartColor(col_4f);
+		prev_string.setVisible(true);
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('start');
+	});
 
-	<script>
-	   var palette_col;
-	   $("td[col=col]").bind("mouseover",function(){ 
-	   
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#start_color").css("background-color",palette_col);
-			palette_col = palette_col.replace("rgb(","");
-			palette_col = palette_col.replace(")","");
-			p_ary = palette_col.split(",");
-	   	   col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
-	   	   col_4f=cc.c4FFromccc3B(col_3b);
-	   	   emitter[p2dx.slot_current].setStartColor(col_4f);
-	   	   prev_string.setVisible(true);
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
+	$("td[col=col]").bind("mousedown", function(){ 
+		palette_col=$(this).css("background-color");
+		$("#start_color").css("background-color",palette_col);
+		palette_col = palette_col.replace("rgb(","");
+		palette_col = palette_col.replace(")","");
+		p_ary = palette_col.split(",");
+		col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
+		col_4f=cc.c4FFromccc3B(col_3b);
+		emitter[p2dx.slot_current].setStartColor(col_4f);
+		prev_string.setVisible(false);
 
-	   $("td[col=col]").bind("mousedown",function(){ 
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#start_color").css("background-color",palette_col);
-			palette_col = palette_col.replace("rgb(","");
-			palette_col = palette_col.replace(")","");
-			p_ary = palette_col.split(",");
-	   	   col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
-	   	   col_4f=cc.c4FFromccc3B(col_3b);
-	   	   emitter[p2dx.slot_current].setStartColor(col_4f);
-	   	   prev_string.setVisible(false);
-	   	   
-	   	   current_start_color=emitter[p2dx.slot_current].getStartColor();
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
+		current_start_color=emitter[p2dx.slot_current].getStartColor();
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('start');
+	});
 
-	   $("td[col=col]").bind("mouseout",function(){ 
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#start_color").css("background-color",palette_col);
-	   	   emitter[p2dx.slot_current].setStartColor(current_start_color);
-	   	   prev_string.setVisible(false);
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
-	   
-	</script>	
-	
-	<script>
-		updStartCol=function(){
-			emitter[p2dx.slot_current].setStartColor(new cc.Color4F(parseFloat($("#start_r").val()),parseFloat($("#start_g").val()),parseFloat($("#start_b").val()),
-		   						parseFloat($("#start_a").val())));//r,g,b,a 
-		    current_start_color=emitter[p2dx.slot_current].getStartColor();
-		};
-		updStartColVar=function(){
-			emitter[p2dx.slot_current].setStartColorVar(new cc.Color4F(parseFloat($("#start_r_var").val()),parseFloat($("#start_g_var").val()),parseFloat($("#start_b_var").val()),
-		   						parseFloat($("#start_a_var").val())));//r,g,b,a
-		};
-		updEndCol=function(){
-			emitter[p2dx.slot_current].setEndColor(new cc.Color4F(parseFloat($("#end_r").val()),parseFloat($("#end_g").val()),parseFloat($("#end_b").val()),
-		   						parseFloat($("#end_a").val())));//r,g,b,a
-		};
-		updEndColVar=function(){
-			emitter[p2dx.slot_current].setEndColorVar(new cc.Color4F(parseFloat($("#end_r_var").val()),parseFloat($("#end_g_var").val()),parseFloat($("#end_b_var").val()),
-		   						parseFloat($("#end_a_var").val())));//r,g,b,a
-		};
-	</script>
+	$("td[col=col]").bind("mouseout", function(){ 
+		palette_col=$(this).css("background-color");
+		$("#start_color").css("background-color",palette_col);
+		emitter[p2dx.slot_current].setStartColor(current_start_color);
+		prev_string.setVisible(false);
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('start');
+	});
+</script>
 
-			<table>
-			<tr><td>
-					Size 
-			</td><td width="80" >
-					<span id="start_size_disp">**</span>
-			</td><td>
-					<input type="range" id="startSize" name="startSize" mix="0" max="400" onMouseMove="
-						if (!flg_mousedown) return;
-						emitter[p2dx.slot_current].setStartSize(parseFloat(this.value)); dumpToInputTag();" />
-					<input type="range" id="startSizeVar" name="startSize" mix="0" max="400" onMouseMove="
-						if (!flg_mousedown) return;
-						emitter[p2dx.slot_current].setStartSizeVar(parseFloat(this.value)); dumpToInputTag();" />
-			</td></tr>
-			<tr><td>
-				Spin 
-			</td><td>
-				<span id="start_spin_disp" >**</span>  
-			</td><td>
-				<input type="range" id="startSpin" name="startSpin" min="-1440" max="1440" value="" 
-				onMouseMove="
+</td>
+<td style="vertical-align:top;" width="50%">
+	<h3><span style="color:gray;">End</span></h3>			
+<!-- ########## END SIZE/SPIN SECTION ########## -->
+<table width="470">
+	<tr>
+		<td>
+			Size 
+		</td>
+		<td width="100" >
+			<span id="end_size_disp">**</span>
+		</td>
+		<td>
+			<input type="range" id="endSize" name="endSize" mix="0" max="400" class="slider-short"
+				onInput="
 					if (!flg_mousedown) return;
-					emitter[p2dx.slot_current].setStartSpin(parseFloat(this.value));dumpToInputTag();" />
-				<input type="range" id="startSpin_var" name="startSpin_var" min="0" max="1440" value="" 
-				onMouseMove="
+					emitter[p2dx.slot_current].setEndSize(parseFloat(this.value));
+					$('#endSize_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="endSize_text" name="endSize_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setEndSize(parseFloat(this.value)); 
+					$('#endSize').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="range" id="endSizeVar" name="endSize" mix="0" max="400" class="slider-short"
+				onInput="
 					if (!flg_mousedown) return;
-					emitter[p2dx.slot_current].setStartSpinVar(parseFloat(this.value));dumpToInputTag();" />		
-			</td></tr>
-			<tr><td>																
-					a 
-			</td><td>
-				<span id="start_a_disp">**</span> 
-			</td><td>
-				<input type="range" id="start_a" name="start_a" mix="0" max="1" step="0.05" onMouseMove="
+					emitter[p2dx.slot_current].setEndSizeVar(parseFloat(this.value));
+					$('#endSizeVar_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="endSizeVar_text" name="endSizeVar_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setEndSizeVar(parseFloat(this.value)); 
+					$('#endSizeVar').val(this.value);
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Spin 
+		</td>
+		<td>
+			<span id="end_spin_disp" >**</span>  
+		</td>
+		<td>
+			<input type="range" id="endSpin" name="endSpin" min="-1440" max="1440" class="slider-short" value="" 
+				onInput="
 					if (!flg_mousedown) return;
-					//$('img[id*=start_size_pic]').css('opacity',this.value);
-					updStartCol(); 
-					dumpToInputTag();" />
-				 <input type="range"  id="start_a_var" name="start_a_var"  mix="0" max="1" step="0.05" onMouseMove="updStartColVar(); dumpToInputTag();" /> 
-			</td></tr>
-			<tr><td>
-						r 
-			</td><td>
-				<span id="start_r_disp">**</span>   
-			</td><td>
-				<input type="range" size="5" id="start_r"     name="start_r"      mix="0" max="1" step="0.05" onMouseMove="
-				if (!flg_mousedown) return;
-				updStartCol();     dumpToInputTag();" />
-				<input type="range" size="5" id="start_r_var" name="start_r_var"  mix="0" max="1" step="0.05" onMouseMove="
-				if (!flg_mousedown) return;
-				updStartColVar();  dumpToInputTag();" />	
-			</td></tr>
-			<tr><td>					
-						g 
-			</td><td>
-				<span id="start_g_disp">**</span>
-			</td><td>
-				<input type="range" size="5" id="start_g"     name="start_g"      mix="0" max="1" step="0.05" onMouseMove="
-				if (!flg_mousedown) return;
-				updStartCol();     dumpToInputTag();" />
-				<input type="range" size="5" id="start_g_var" name="start_g_var"  mix="0" max="1" step="0.05" onMouseMove="
-				if (!flg_mousedown) return;
-				updStartColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			<tr><td>	
-						b 
-			</td><td>
-						<span id="start_b_disp">**</span>   
-			</td><td>
-				<input type="range" size="5" id="start_b"     name="start_b"      mix="0" max="1" step="0.05" 
-				onMouseMove="
+					emitter[p2dx.slot_current].setEndSpin(parseFloat(this.value));
+					$('#endSpin_text').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="text" size="2" id="endSpin_text" name="endSpin_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					emitter[p2dx.slot_current].setEndSpin(parseFloat(this.value)); 
+					$('#endSpin').val(this.value);
+					dumpToInputTag();
+			" />
+
+			<input type="range" id="endSpinVar" name="endSpinVar" min="0" max="1440" class="slider-short" value="" 
+				onInput="
 					if (!flg_mousedown) return;
-					updStartCol();     dumpToInputTag();" />
-				<input type="range" size="5" id="start_b_var" name="start_b_var"  mix="0" max="1" step="0.05" 
-				onMouseMove="
-					if (!flg_mousedown) return;
-					updStartColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			</table>
-	
-		</td><td style="vertical-align:top;" width="50%">
+					emitter[p2dx.slot_current].setEndSpinVar(parseFloat(this.value));
+					$('#endSpinVar_text').val(this.value);
+					dumpToInputTag();
+			" />
 
-			<h3><span style="color:gray;">End</span></h3>
-			
-			<div id="end_color">endcolor</div>
-
-
-		<table id="palette" cellspacing=1 border=0 ><tr>
-			    <? 
-			    for($i=3;$i<=15;$i=$i+3) { 
-			    	echo "<tr>";
-					for($j=3;$j<=15;$j=$j+3) { 
-						for($k=3;$k<=15;$k=$k+3) { 							    
-					?>
-					<td col="col_end" title="#<?=dechex($i*256+$j*16+$k);?>"  style="background-color:#<?=dechex($i*256+$j*16+$k);?>;width:8px;height:8px;font-size:6px;">&nbsp;
-					</td>
-					<?  }
-				    } 
-				    echo "</tr>";
-		        } ?>
-		</tr></table>
-
-	<script>
-	   var palette_col;
-	   $("td[col=col_end]").bind("mouseover",function(){ 
-	   
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#end_color").css("background-color",palette_col);
-			palette_col = palette_col.replace("rgb(","");
-			palette_col = palette_col.replace(")","");
-			p_ary = palette_col.split(",");
-	   	   col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
-	   	   col_4f=cc.c4FFromccc3B(col_3b);
-	   	   emitter[p2dx.slot_current].setEndColor(col_4f);
-	   	   prev_string.setVisible(true);
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
-
-	   $("td[col=col_end]").bind("mousedown",function(){ 
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#end_color").css("background-color",palette_col);
-			palette_col = palette_col.replace("rgb(","");
-			palette_col = palette_col.replace(")","");
-			p_ary = palette_col.split(",");
-	   	   col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
-	   	   col_4f=cc.c4FFromccc3B(col_3b);
-	   	   emitter[p2dx.slot_current].setEndColor(col_4f);
-	   	   prev_string.setVisible(false);
-	   	   
-	   	   current_end_color=emitter[p2dx.slot_current].getEndColor();
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
-
-	   $("td[col=col_end]").bind("mouseout",function(){ 
-	   	  palette_col=$(this).css("background-color");
-	   	  $("#end_color").css("background-color",palette_col);
-	   	   emitter[p2dx.slot_current].setEndColor(current_end_color);
-	   	   prev_string.setVisible(false);
-	   	   //emitter からテキストボックスへ
-	   	   dumpToInputTag(p2dx.slot_current);
-	   });
-	   
-	</script>	
-
-
-			<table>
-			<tr><td>		
-					Size 
-			</td><td td width="80" >
-					<span id="end_size_disp">**</span>
-			</td><td>
-					<input type="range" id="endSize" name="endSize" mix="0" max="400" 
-					onMouseMove="
-						if (!flg_mousedown) return;
-						emitter[p2dx.slot_current].setEndSize(parseFloat(this.value)); dumpToInputTag();" />
-					<input type="range" id="endSizeVar" name="endSize" mix="0" max="400" 
-					onMouseMove="
-						if (!flg_mousedown) return;
-						emitter[p2dx.slot_current].setEndSizeVar(parseFloat(this.value)); dumpToInputTag();" />
-			</td></tr>
-			<tr><td>
-				Spin 
-			</td><td>
-				<span id="end_spin_disp" >**</span>  
-			</td><td>
-				<input type="range" id="endSpin" name="endSpin" min="-1440" max="1440" value="" 
-				onMouseMove="
-					if (!flg_mousedown) return;
-					emitter[p2dx.slot_current].setEndSpin(parseFloat(this.value));dumpToInputTag();" />
-				
-				<input type="range" id="endSpin_var" name="endSpin_var" min="0" max="1440" value="" 
-				onMouseMove="
-					if (!flg_mousedown) return;
-					emitter[p2dx.slot_current].setEndSpinVar(parseFloat(this.value));dumpToInputTag();" />		
-				
-			</td></tr>
-			<tr><td>
-					a
-			</td><td>
-					<span id="end_a_disp">**</span>	
-			</td><td>	
-						<input type="range" id="end_a" name="end_a" min="0" max="1" step="0.05" 
-						onMouseMove="
-							if (!flg_mousedown) return;
-							$('#img[id*=end_size_pic]').css('opacity',this.value); updEndCol(); dumpToInputTag();" />
-					    <input type="range" size="5" id="end_a_var" name="end_a_var" min="0" max="1" step="0.05"  
-					    onMouseMove="
-					    	if (!flg_mousedown) return;
-					    	updEndColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			<tr><td>
-						r     
-			</td><td>
-						<span id="end_r_disp">**</span>	 
-			</td><td>
-						<input type="range" size="5" id="end_r"     name="end_r"      mix="0" max="1" step="0.05" 
-						onMouseMove="
-							if (!flg_mousedown) return;
-							updEndCol();     dumpToInputTag();" />
-						 <input type="range" size="5" id="end_r_var" name="end_r_var" mix="0" max="1" step="0.05" 
-						 onMouseMove="
-						 	if (!flg_mousedown) return;
-						 	updEndColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			<tr><td>
-						g 
-			</td><td>    
-						<span id="end_g_disp">**</span>	 
-			</td><td>
-						<input type="range" size="5" id="end_g"     name="end_g"      mix="0" max="1" step="0.05" 
-						onMouseMove="
-							if (!flg_mousedown) return;
-							updEndCol();     dumpToInputTag();" />
-						 <input type="range" size="5" id="end_g_var" name="end_g_var" mix="0" max="1" step="0.05" 
-						 onMouseMove="
-						 	if (!flg_mousedown) return;
-						 	updEndColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			<tr><td>
-						b     
-			</td><td>
-						<span id="end_b_disp">**</span>	 
-			</td><td>
-						<input type="range" size="5" id="end_b"     name="end_b"      mix="0" max="1" step="0.05" 
-						onMouseMove="
-							if (!flg_mousedown) return;
-							updEndCol();     dumpToInputTag();" />
-						 <input type="range" size="5" id="end_b_var" name="end_b_var" mix="0" max="1" step="0.05" 
-						 onMouseMove="
-						 	if (!flg_mousedown) return;
-						 	updEndColVar();  dumpToInputTag();" /> <br/>
-			</td></tr>
-			</table>
-
-		</td></tr>
-		<tr><td style="vertical-align:top;">
-			</td><td style="vertical-align:top;">				
+			<input type="text" size="2" id="endSpinVar_text" name="endSpinVar_text" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; } 						
+					emitter[p2dx.slot_current].setEndSpinVar(parseFloat(this.value)); 
+					$('#endSpinVar').val(this.value);
+					dumpToInputTag();
+			" />
+			</br>&nbsp;
+		</td>
+	</tr>
 		
-				
-						
-		</td></tr>				
-		</table>
+<!-- ########## END COLOR INPUT SECTION ########## -->
+	<tr>
+		<td valign="top" colspan="3" class="gradientBackground" style="position:relative">
+			COLOR
+			<span style="position:absolute;right:6px">
+				Paste Start
+				<input type="button" id="paste_start_color" value="Color" style="font-size:12px" 
+					onClick="
+						emitter[p2dx.slot_current].setEndColor(current_start_color);
+						dumpToInputTag();
+						updEndCol();
+				"/>
+				<input type="button" id="paste_start_color_var" value="Var" style="font-size:12px" 
+					onClick="
+						emitter[p2dx.slot_current].setEndColorVar(emitter[p2dx.slot_current].getStartColorVar());
+						dumpToInputTag();
+						updEndColVar();
+				"/>
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" style="padding:10px">
+			<!-- Color Picker : jscolor, 'onFineChange' does not trigger when value changed by '.jscolor.fromRGB()' -->
+			<input
+				id="end_color_picker" size="22"
+				class="jscolor {
+					width:300,
+					height:150,
+					position:'right',
+					borderColor:'#FFF',
+					insetColor:'#FFF',
+					backgroundColor:'#666',
+					onFineChange:'updateEndColor(this)'
+				}"
+				style="opacity:1"
+			>
+			<script>
+				function updateEndColor(picker) {
+					// change value of rgb range input, will trigger update color process
+					$("#end_r").val(picker.rgb[0]);
+					$("#end_g").val(picker.rgb[1]);
+					$("#end_b").val(picker.rgb[2]);
+					$('#end_r_text').val(parseInt(picker.rgb[0]));
+					$('#end_g_text').val(parseInt(picker.rgb[1]));
+					$('#end_b_text').val(parseInt(picker.rgb[2]));
+					updEndCol();
+					dumpToInputTag();
+				}
+			</script>
+		</td>
+	</tr>
+	<tr bgcolor="#292929">
+		<td valign="top" align="center">
+			R
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="end_r_text" name="end_r_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_r').val(this.value);
+					updEndCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="end_r_var_text" name="end_r_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_r_var').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="end_r" name="end_r" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#end_r_text').val(this.value);
+					updEndCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="end_r_var" name="end_r_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#end_r_var_text').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" align="center">
+			G
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="end_g_text" name="end_g_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_g').val(this.value);
+					updEndCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="end_g_var_text" name="end_g_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_g_var').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="end_g" name="end_g" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#end_g_text').val(this.value);
+					updEndCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="end_g_var" name="end_g_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#end_g_var_text').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr bgcolor="#292929">
+		<td valign="top" align="center">
+			B
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="end_b_text" name="end_b_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_b').val(this.value);
+					updEndCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="end_b_var_text" name="end_b_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_b_var').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="end_b" name="end_b" mix="0" max="255" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#end_b_text').val(this.value);
+					updEndCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="end_b_var" name="end_b_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#end_b_var_text').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" align="center">
+			A
+		</td>
+		<td colspan="2" style="padding:6px">
+			<input type="text" size="5" id="end_a_text" name="end_a_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_a').val(this.value);
+					updEndCol();
+					dumpToInputTag(); ">
+			 ± 
+			<input type="text" size="5" id="end_a_var_text" name="end_a_var_text" class="textfield-long" 
+				onChange="
+					if (!$.isNumeric(this.value)) { alert('set number!'); return false; }
+					$('#end_a_var').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" /> %</br>
+
+			<input type="range" id="end_a" name="end_a" mix="0" max="100" step="1" class="slider-long" 
+				onMouseMove="
+					if (!flg_mousedown) return;
+					$('#end_a_text').val(this.value);
+					updEndCol();
+					dumpToInputTag();
+			" />
+			<input type="range" id="end_a_var" name="end_a_var"  mix="0" max="100" step="1" class="slider-long" 
+				onInput="
+					if (!flg_mousedown) return;
+					$('#end_a_var_text').val(this.value);
+					updEndColVar();
+					dumpToInputTag();
+			" />
+		</td>
+	</tr>
+</table>
 
 
-	ColorVariance
-	<a id="cv_1" href="javascript:setColorInit(); dumpToInputTag();">0%</a> 
-	<a id="cv_2" href="javascript:
-				emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.1,0.1,0.1,0.5)  ); 
-				emitter[p2dx.slot_current].setEndColor(emitter[p2dx.slot_current].getStartColor()); 
-				emitter[p2dx.slot_current].setEndColorVar(  cc.c4f(0,0,0,0) ); 
-				dumpToInputTag();">10%</a>
-	<a id="cv_3" href="javascript:
-				emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.2,0.2,0.2,0.5) ); 
-				dumpToInputTag();">20%</a>
-	<a id="cv_4" href="javascript:
-				emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.4,0.4,0.4,0.5) ); 
-				dumpToInputTag();">40%</a>
-	
-	<a id="cv_5" href="javascript:    
-				emitter[p2dx.slot_current].setStartColorVar(cc.c4f(1,1,1,1));  
-				dumpToInputTag();">100%</a> 								
+<!-- ########## END COLOR PALETTE SECTION ########## -->
+<!-- <div id="end_color" style="visibility: hidden">endcolor</div> -->
+<div style="margin-left:60px;margin-right:60px">
+<table id="palette" cellspacing=1 border=0 style="width:100%">
+	<tr>
+		<? 
+		for($i=3;$i<=15;$i=$i+3) {
+			echo "<tr>";
+			for($j=3;$j<=15;$j=$j+3) {
+				for($k=3;$k<=15;$k=$k+3) {
+					?>
+					<td col="col_end" title="#<?=dechex($i*256+$j*16+$k);?>"  style="background-color:#<?=dechex($i*256+$j*16+$k);?>;width:8px;height:8px;">
+					</td>
+					<?
+				}
+			}
+			echo "</tr>";
+		} ?>
+	</tr>
+</table>
+</div>
+<script>
+	function updateColorPicker(str) {
+		document.getElementById(str + '_color_picker').jscolor.fromRGB(
+			$('#' + str + '_r').val(),
+			$('#' + str + '_g').val(),
+			$('#' + str + '_b').val()
+		);
+	}
 
+	var palette_col;
+	$("td[col=col_end]").bind("mouseover", function(){
+		palette_col=$(this).css("background-color");
+		$("#end_color").css("background-color",palette_col);
+		palette_col = palette_col.replace("rgb(","");
+		palette_col = palette_col.replace(")","");
+		p_ary = palette_col.split(",");
+		col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
+		col_4f=cc.c4FFromccc3B(col_3b);
+		emitter[p2dx.slot_current].setEndColor(col_4f);
+		prev_string.setVisible(true);
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('end')
+	});
 
-	<br/>
+	$("td[col=col_end]").bind("mousedown", function(){ 
+		palette_col=$(this).css("background-color");
+		$("#end_color").css("background-color",palette_col);
+		palette_col = palette_col.replace("rgb(","");
+		palette_col = palette_col.replace(")","");
+		p_ary = palette_col.split(",");
+		col_3b= cc.c3b(p_ary[0],p_ary[1],p_ary[2]);
+		col_4f=cc.c4FFromccc3B(col_3b);
+		emitter[p2dx.slot_current].setEndColor(col_4f);
+		prev_string.setVisible(false);
 
-	</div><!-- pane_shape -->
+		current_end_color=emitter[p2dx.slot_current].getEndColor();
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('end')
+	});
+
+	$("td[col=col_end]").bind("mouseout", function(){ 
+		palette_col=$(this).css("background-color");
+		$("#end_color").css("background-color",palette_col);
+		emitter[p2dx.slot_current].setEndColor(current_end_color);
+		prev_string.setVisible(false);
+		//emitter からテキストボックスへ
+		dumpToInputTag(p2dx.slot_current);
+		updateColorPicker('end')		
+	});
+</script>
+
+</table>
+
+<!-- ########## COLOR VARIANCE PRESET SECTION ########## -->
+ColorVariance
+<a id="cv_1" href="javascript:
+	setColorInit(); dumpToInputTag();">0%</a> 
+<a id="cv_2" href="javascript:
+	emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.1,0.1,0.1,0.5)  ); 
+	emitter[p2dx.slot_current].setEndColor(emitter[p2dx.slot_current].getStartColor()); 
+	emitter[p2dx.slot_current].setEndColorVar(  cc.c4f(0,0,0,0) ); 
+	dumpToInputTag();">10%</a>
+<a id="cv_3" href="javascript:
+	emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.2,0.2,0.2,0.5) ); 
+	dumpToInputTag();">20%</a>
+<a id="cv_4" href="javascript:
+	emitter[p2dx.slot_current].setStartColorVar(  cc.c4f(0.4,0.4,0.4,0.5) ); 
+	dumpToInputTag();">40%</a>
+<a id="cv_5" href="javascript:
+	emitter[p2dx.slot_current].setStartColorVar(cc.c4f(1,1,1,1));  
+	dumpToInputTag();">100%</a>
+<br/>
+
+<!-- ########## TEXTURES RESOURCE AND DROP PNG SECTION ########## -->
+
+	<table>
+		<tr>
+			<td>
+				<!-- Textures Area -->
+				<?
+				// $pngs = array_slice(scandir("png/"), 2);// $pngs= explode("\n",trim(`ls png/ | grep -i 'png'`));
+				$pngs = preg_grep('~\.(jpeg|jpg|png|bmp)$~', scandir("png/"));// $pngs= explode("\n",trim(`ls png/ | grep -i 'png'`));
+				// echo "<script>alert($scan);</script>";
+				?>
+			</br>
+				<table bgcolor="#161616">
+					<tr>
+						<h3><span style="color:gray;">Textures ( textures in png folder )</span></h3>
+					</tr>
+					<tr id='textures'>
+						<!-- <input type="checkbox" name="prevOption" />Preview on Hover -->
+						<? foreach ($pngs as $val) {
+							$val=preg_replace("/(.*)(\..*)/",'$1',trim($val));
+						?>
+							<td>
+								<a href='javascript:void(0)' title="<?=$val?>"
+									onClick='setTex("<?=$val?>");
+										$("#textures").children("td").children("a").children("img").css("background-color",""); 
+										$(this).children("img").css("background-color","#aaaaff"); '
+									onMouseOver='//prevTex("<?=$val?>");' 
+									onMouseOut='prevMouseOut();' 
+									<? if ($_SESSION['png_name']==$val) echo " style='font-weight:bold' "; ?>>
+									<?=$val?>
+									</br>
+									<img src="png/<?=$val?>.png" alt="<?=$val ?>" />
+								</a>
+							</td>
+							<?			
+							$png_path= 'png/'.$val.'.png';
+							$png_binary=file_get_contents($png_path);
+							$gzip=gzencode($png_binary);
+							$png_gz_base64[$val]=base64_encode($gzip);
+						}
+						$json_gz_b64_png= json_encode($png_gz_base64);
+							?>
+					</tr>
+				</table>
+				</br>
+				<!-- DropPNG Area -->
+				<div id="dropzone" dropzone style="border:1px solid #666666; width:100px; height:80px;">
+					DropPNG
+					<blockquote>
+						<a href="javascript:setTex('png_ul/'+response);" style="font-weight:bold"><img id="uploaded_png" src="" /></a>
+					</blockquote>
+				</div>
+			    <script>
+					$('#dropzone').on('drop', function(event) {
+						//ファイル取得 // File acquisition
+						var file = event.originalEvent.dataTransfer.files[0];
+						var formData = new FormData();
+						formData.append('file', file);
+
+						//アップロード // upload
+						$.ajax('index.php?type=texture_png_upload', {
+							method: 'POST',
+							contentType: false,
+							processData: false,
+							data:formData,
+							error: function(xhr, error) {
+								clog('ul fail');
+								clog(error);
+							},
+							success: function(response) {
+								clog('ul success');
+								clog(response);
+
+								$("#uploaded_png").attr('src','png_ul/'+response);
+								var myTexture = cc.TextureCache.getInstance().addImage('png_ul/'+response);//元画像を用意
+								emitter[p2dx.slot_current].setTexture(myTexture);
+
+								url="index.php?type=b64gzpng_dl&filename="+response;
+								$.ajax({
+									async:false,
+									type: "GET",
+									url: url,
+									success:function(data){
+										png_gz_b64[p2dx.slot_current]=data;// gzip > base64 したファイルを取得 // gzip > base64 Get the file
+									}
+								});	
+								dumpToInputTag(p2dx.slot_current);//inputタグに書き出す // Write to the input tag
+							}
+						});
+					return false;
+					}).on('dragover', function(event) {
+						return false;
+					});
+				</script>
+			</td>
+		</tr>
+	</table>
+
+	</div>
+
+	<!-- pane_shape -->
 
 	<div id="topleft_pane_motion" >
 	
@@ -1238,11 +1742,11 @@ $plist_64=base64_encode($plist_temp);
 					<span id="duration_disp" >**</span> sec 
 				</td><td>
 					<input type="range" id="duration" name="duration" min="-1" max="10" step="0.02" 
-					onMouseMove="
-						if (!flg_mousedown) return;
-						emitter[p2dx.slot_current].setDuration(parseFloat(this.value));
-						emitter[p2dx.slot_current].resetSystem();
-						dumpToInputTag();" />
+						onInput="
+							if (!flg_mousedown) return;
+							emitter[p2dx.slot_current].setDuration(parseFloat(this.value));
+							emitter[p2dx.slot_current].resetSystem();
+							dumpToInputTag();" />
 					<input type="text" size="4" id="duration_text"name="duration_text" 
 						onChange="
 							if (!$.isNumeric(this.value)) { alert('set number!'); return false; } 
@@ -1267,7 +1771,7 @@ $plist_64=base64_encode($plist_temp);
 				</td><td>
 				
 					<input type="range" id="life" name="life" min="0.01" max="10" step="0.01" 
-						onMouseMove="
+						onInput="
 								if (!flg_mousedown) return;	
 								emitter[p2dx.slot_current].setLife( parseFloat(this.value) );
 								emitter[p2dx.slot_current].setTotalParticles(parseInt(emitter[p2dx.slot_current].getEmissionRate() * emitter[p2dx.slot_current].getLife() ));
@@ -1280,7 +1784,7 @@ $plist_64=base64_encode($plist_temp);
 							dumpToInputTag(); " > 
 								
 					<input type="range" id="lifeVar" name="lifeVar" min="0" max="10" step="0.1"
-							onMouseMove="
+							onInput="
 								if (!flg_mousedown) return;
 								emitter[p2dx.slot_current].setLifeVar(parseFloat(this.value));
 								dumpToInputTag(p2dx.slot_current); " />
@@ -1299,7 +1803,7 @@ $plist_64=base64_encode($plist_temp);
 						<span id="emit_rate_disp" >**</span>
 				</td><td>
 				<input id="emissionRate" name="emissionRate" type="range" min="1" max="800" 
-				onMouseMove="
+				onInput="
 					if (!flg_mousedown) return;
 					emitter[p2dx.slot_current].setEmissionRate(parseInt(this.value));																										emitter[p2dx.slot_current].setTotalParticles(parseInt(emitter[p2dx.slot_current].getEmissionRate()*emitter[p2dx.slot_current].getLife()));
 					dumpToInputTag(p2dx.slot_current);"/>
@@ -1317,7 +1821,7 @@ $plist_64=base64_encode($plist_temp);
 							<span id="angle_disp" >**</span>
 						</td><td>
 							<input id="angle" type="range" guide="1" min="-180" max="180" step="1"
-								onMouseMove="
+								onInput="
 										if (!flg_mousedown) return;
 										emitter[p2dx.slot_current].setAngle(parseInt(this.value)); 
 										setGuideObj(p2dx.slot_current);
@@ -1332,7 +1836,7 @@ $plist_64=base64_encode($plist_temp);
 									dumpToInputTag(p2dx.slot_current);"/>
 									
 							<input id="angle_var" type="range" guide="1" min="0" max="180" step="1"
-								onMouseMove="
+								onInput="
 										if (!flg_mousedown) return;
 										emitter[p2dx.slot_current].setAngleVar(parseInt(this.value));
 										setGuideObj(p2dx.slot_current); 
@@ -1587,7 +2091,7 @@ $plist_64=base64_encode($plist_temp);
 				<span id="speedVar_disp" >**</span>			
 			</td><td>
 				<input type="range" id="speed"    name="speed"    guide="1" min="0" max="600" 
-				onMouseMove="
+				onInput="
 					if (!flg_mousedown) return;
 					emitter[p2dx.slot_current].setSpeed(parseFloat(this.value));
 					dumpToInputTag(p2dx.slot_current);" />
@@ -1600,7 +2104,7 @@ $plist_64=base64_encode($plist_temp);
 
 
 				<input type="range" id="speedVar" name="speedVar" guide="1" min="0" max="600" 
-				onMouseMove="
+				onInput="
 					if (!flg_mousedown) return;
 					emitter[p2dx.slot_current].setSpeedVar(parseFloat(this.value));
 					dumpToInputTag(p2dx.slot_current);" />
@@ -1620,7 +2124,7 @@ $plist_64=base64_encode($plist_temp);
 			</td><td>
 			
 				<input id="pos_var_x" name="pos_var_x" type="range" guide="1" min="0" max="800" 
-				   onMouseMove="
+				   onInput="
 				   		if (!flg_mousedown) return;
 				   		emitter[p2dx.slot_current].setPosVar(cc.p(parseInt(this.value),parseInt(emitter[p2dx.slot_current].getPosVar().y)));
 				   		setGuideObj(p2dx.slot_current);
@@ -1634,7 +2138,7 @@ $plist_64=base64_encode($plist_temp);
 						dumpToInputTag(); "> 
 						
 				<input id="pos_var_y" name="pos_var_y" type="range" guide="1" min="0" max="800"
-				 onMouseMove="
+				 onInput="
 						if (!flg_mousedown) return;
 						emitter[p2dx.slot_current].setPosVar(cc.p(parseInt(emitter[p2dx.slot_current].getPosVar().x),parseInt(this.value)));
 						setGuideObj(p2dx.slot_current);
@@ -1656,7 +2160,7 @@ $plist_64=base64_encode($plist_temp);
 			</td><td>
 
 				<input id="gravity_x" name="gravity_x" type="range" guide="1" min="-1200" max="1200" 
-								onMouseMove="
+								onInput="
 									if (!flg_mousedown) return;
 									emitter[p2dx.slot_current].setGravity(cc.p(this.value,emitter[p2dx.slot_current].getGravity().y)); 
 								    dumpToInputTag(p2dx.slot_current);"/>
@@ -1668,7 +2172,7 @@ $plist_64=base64_encode($plist_temp);
 						dumpToInputTag(); " > 					    
 								    
 				<input id="gravity_y" name="gravity_y" type="range" guide="1" min="-1200" max="1200" 
-								onMouseMove="
+								onInput="
 									if (!flg_mousedown) return;
 									emitter[p2dx.slot_current].setGravity(cc.p(emitter[p2dx.slot_current].getGravity().x,this.value));
 								    dumpToInputTag(p2dx.slot_current);"/>
@@ -1686,7 +2190,7 @@ $plist_64=base64_encode($plist_temp);
 						<span id="rad_accel_disp">**</span> 
 				</td><td>
 						<input type="range" id="rad_accel" name="rad_accel"  min="-800" max="600"  
-						onMouseMove="
+						onInput="
 							if (!flg_mousedown) return;
 							emitter[p2dx.slot_current].setRadialAccel(parseFloat(this.value)); 
 							dumpToInputTag(p2dx.slot_current); " />
@@ -1699,7 +2203,7 @@ $plist_64=base64_encode($plist_temp);
 					
 												
 						 <input type="range" id="rad_accel_var" name="rad_accel_var" min="0" max="600" 
-						  	onMouseMove="
+						  	onInput="
 						  		if (!flg_mousedown) return;
 								emitter[p2dx.slot_current].setRadialAccelVar(parseFloat(this.value)); 
 								dumpToInputTag(p2dx.slot_current);" />
@@ -1717,7 +2221,7 @@ $plist_64=base64_encode($plist_temp);
 						<span id="tan_accel_disp">**</span> 
 				</td><td>
 					<input type="range" id="tan_accel" name="tan_accel" min="-800" max="800"   
-						onMouseMove="
+						onInput="
 							if (!flg_mousedown) return;
 							emitter[p2dx.slot_current].setTangentialAccel(parseFloat(this.value)); 
 							dumpToInputTag(p2dx.slot_current); " />
@@ -1729,7 +2233,7 @@ $plist_64=base64_encode($plist_temp);
 							dumpToInputTag(); "> 	
 	
 					 <input type="range" id="tan_accel_var" name="tan_accel_var" min="0" max="600" 
-						 onMouseMove="
+						 onInput="
 						 	if (!flg_mousedown) return;
 						 	emitter[p2dx.slot_current].setTangentialAccelVar(parseFloat(this.value)); 
 						 	dumpToInputTag(p2dx.slot_current);" /> 	
@@ -1753,7 +2257,7 @@ $plist_64=base64_encode($plist_temp);
 				<span id="max_radius_disp">**</span>
 			</td><td>			
 					<input type="range" id="maxRadius" name="maxRadius" guide="1" min="0" max="1000" 
-					onMouseMove="
+					onInput="
 						if (!flg_mousedown) return;
 						emitter[p2dx.slot_current].setStartRadius(parseFloat(this.value)); 
 						setGuideObj(p2dx.slot_current);
@@ -1768,7 +2272,7 @@ $plist_64=base64_encode($plist_temp);
 						
 						
 					<input type="range" id="maxRadiusVar" name="maxRadiusVar" guide="1" min="0" max="1000" 
-					onMouseMove="
+					onInput="
 						if (!flg_mousedown) return;
 						emitter[p2dx.slot_current].setStartRadiusVar(parseFloat(this.value)); 
 						setGuideObj(p2dx.slot_current);
@@ -1789,7 +2293,7 @@ $plist_64=base64_encode($plist_temp);
 				<span id="min_radius_disp">**</span>
 			</td><td>
 					<input type="range" id="minRadius" name="minRadius" guide="1" min="0" max="1000" 
-						onMouseMove="
+						onInput="
 							if (!flg_mousedown) return;
 							emitter[p2dx.slot_current].setEndRadius(parseFloat(this.value)); 
 							setGuideObj(p2dx.slot_current);
@@ -1809,7 +2313,7 @@ $plist_64=base64_encode($plist_temp);
 					<span id="rotate_par_second_disp">**</span>
 			</td><td>
 					 <input type="range" id="rotatePerSecond" name="rotatePerSecond" guide="1" min="-1000" max="1000"    
-					 onMouseMove="
+					 onInput="
 					 	if (!flg_mousedown) return;
 					 	emitter[p2dx.slot_current].setRotatePerSecond(parseFloat(this.value)); 
 					 	dumpToInputTag(p2dx.slot_current);
@@ -1823,7 +2327,7 @@ $plist_64=base64_encode($plist_temp);
 
 					 	
 					 <input type="range" id="rotatePerSecondVar" name="rotatePerSecondVar" guide="1" min="0" max="1000"           
-					 onMouseMove="
+					 onInput="
 					 	if (!flg_mousedown) return;
 					 	emitter[p2dx.slot_current].setRotatePerSecondVar(parseFloat(this.value)); 
 					 	dumpToInputTag(p2dx.slot_current);
@@ -1874,8 +2378,8 @@ $plist_64=base64_encode($plist_temp);
 	<a id="panelink_template" href="javascript:$('#plist_out').slideToggle(100);" style="font-size:80%;" >RealtimePList</a>
 	<div id="plist_out" style="display:none;">
 		<h3>Plist  <span id="plist_changed" style="font-size:10px;">***</span>  </h3>
-		<pre id="plist" style="font-size:70%;margin-left:20px;"></pre>
 		<img id="img_check" />
+		<pre id="plist" style="font-size:70%;margin-left:20px;"></pre>
 		<pre id="p2dx_out" style="font-size:70%;margin-left:20px;"></pre>
 	</div>
 </div>
